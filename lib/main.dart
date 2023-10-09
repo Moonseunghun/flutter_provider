@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Counter',
+      title: 'Provider 02',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -20,141 +20,63 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int counter = 0;
-
-  void increment() {
-    setState(() {
-      counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Counter'),
+        title: Text('Provider 02'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              color: Colors.blue[100],
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'MyHomePage',
-                style: TextStyle(fontSize: 24.0),
-              ),
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              '- name: Dog name',
+              style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(height: 20.0),
-            CounterA(
-              counter: counter,
-              increment: increment,
-            ),
-            SizedBox(height: 20.0),
-            Middle(counter: counter,),
+            SizedBox(height: 10.0),
+            BreedAndAge(),
           ],
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-class CounterA extends StatelessWidget {
-  final int counter;
-  final void Function() increment;
-
-  const CounterA({
-    Key? key,
-    required this.counter,
-    required this.increment}) : super(key: key);
+class BreedAndAge extends StatelessWidget {
+  const BreedAndAge({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red[100],
-      child: Column(
-        children: [
-          Text(
-            '$counter',
-            style: TextStyle(fontSize: 48.0),
-          ),
-          ElevatedButton(
-            onPressed: increment,
-            child: Text(
-              'Increment',
-              style: TextStyle(fontSize: 20.0),
-            ),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(20.0),
+    return Column(
+      children: [
+        Text(
+          '- breed: Dog breed',
+          style: TextStyle(fontSize: 20.0),
+        ),
+        SizedBox(height: 10.0),
+        Age(),
+      ],
     );
   }
 }
 
-class Middle extends StatelessWidget {
-  final int counter;
-  const Middle({Key? key, required this.counter}) : super(key: key);
+class Age extends StatelessWidget {
+  const Age({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey[200],
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CounterB(
-            counter: counter,
-          ),
-          SizedBox(width: 20.0),
-          Sibling(),
-        ],
-      ),
-    );
-  }
-}
-
-class CounterB extends StatelessWidget {
-  final int counter;
-  const CounterB({Key? key, required this.counter}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellow[100],
-      padding: const EdgeInsets.all(10.0),
-      child: Text(
-        '0',
-        style: TextStyle(fontSize: 24.0),
-      ),
-    );
-  }
-}
-
-class Sibling extends StatelessWidget {
-  const Sibling({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.orange[100],
-      padding: const EdgeInsets.all(10.0),
-      child: Text(
-        'Sibling',
-        style: TextStyle(fontSize: 24.0),
-      ),
+    return Column(
+      children: [
+        Text(
+          '- age: Dog age',
+          style: TextStyle(fontSize: 20.0),
+        ),
+      ],
     );
   }
 }
