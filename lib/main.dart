@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'models/dog.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,13 +11,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Provider 02',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider<Dog>(
+      create: (context) => Dog(
+        name: 'Sun',
+        breed: 'Bulldog',
+        age: 3,
       ),
-      home: const MyHomePage(),
+      child: MaterialApp(
+        title: 'Provider 02',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(),
+      ),
     );
   }
 }
@@ -35,7 +44,7 @@ class MyHomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '- name: Dog name',
+              '- name: ${Provider.of<Dog>(context).name}',
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(height: 10.0),
@@ -55,7 +64,7 @@ class BreedAndAge extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '- breed: Dog breed',
+          '- breed: ${Provider.of<Dog>(context).breed}',
           style: TextStyle(fontSize: 20.0),
         ),
         SizedBox(height: 10.0),
@@ -73,8 +82,16 @@ class Age extends StatelessWidget {
     return Column(
       children: [
         Text(
-          '- age: Dog age',
+          '- age: ${Provider.of<Dog>(context).age}',
           style: TextStyle(fontSize: 20.0),
+        ),
+        SizedBox(height: 20.0),
+        ElevatedButton(
+          onPressed: () => Provider.of<Dog>(context, listen: false).grow(),
+          child: Text(
+            'Grow',
+            style: TextStyle(fontSize: 20.0),
+          ),
         ),
       ],
     );
